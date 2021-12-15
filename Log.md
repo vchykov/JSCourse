@@ -1,5 +1,6 @@
 # JSCourse
-The Log for recording learning progress. 
+The Log for recording learning progress.
+
 13.12.2021
 
 	Иван Петреченко - автор курса 
