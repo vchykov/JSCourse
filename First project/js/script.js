@@ -14,7 +14,9 @@ str.length - и поучить её длину)
 
 4) Потренироваться и переписать цикл еще двумя способами*/
 
-"use strict";
+(function () {
+
+'use strict';
 
 const personalMovieDB = {
     count: 0,
@@ -34,7 +36,7 @@ while (i > 0) {
         lastSeenFilmEstimate = prompt("На сколько оцените его?", "");
     if (lastSeenFilmName == null || lastSeenFilmName == "" || lastSeenFilmName.length > 50 ||
         lastSeenFilmEstimate == null || lastSeenFilmEstimate == "") {
-            console.log("Ошибка. Вводите непустую строку до 50 символов!");
+        console.log("Ошибка. Вводите непустую строку до 50 символов!");
         continue;
     } else {
         personalMovieDB.movies[lastSeenFilmName] = lastSeenFilmEstimate;
@@ -53,3 +55,5 @@ if (personalMovieDB.count < 10 && personalMovieDB.count >= 0) {
 }
 
 console.log(personalMovieDB);
+
+}());
