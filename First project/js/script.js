@@ -1,59 +1,97 @@
 
 /* Задание на урок:
 
-1) Автоматизировать вопросы пользователю про фильмы при помощи цикла
+1) Первую часть задания повторить по уроку
 
-2) Сделать так, чтобы пользователь не мог оставить ответ в виде пустой строки,
-отменить ответ или ввести название фильма длинее, чем 50 символов. Если это происходит - 
-возвращаем польователя к вопросам опять. (К любой строке можно обратиться как 
-str.length - и поучить её длину)
+2) Создать функцию showMyDB, которая будет проверять свойство private. Если стоит в позиции 
+false - выводит в консоль главный объект программы
  
-3) При помощи условий проверить personalMovieDB.count, и если он меньше 10 - вывести сообщение
-"Просмотрено довольно мало фильмов", если от 10 до 30 - "Вы классический зритель", а если больше - 
-"Вы киноман". А если не подошло ни к одному варианту - "Произошла ошибка"
+3) Создать функцию writeYourGenres, в которой пользователь будет 3 раза отвечать на вопрос
+"Ваш любимый жанр под номером ${номер по порядку}". Каждый ответ записывается в массив данных
+genres
 
-4) Потренироваться и переписать цикл еще двумя способами*/
+P.S. Функции вызывать не обязательно */
 
 (function () {
 
 'use strict';
 
+let numberOfFilms;
+
 const personalMovieDB = {
-    count: 0,
-    movies: {},
+    count: numberOfFilms,
+    movies: {}, 
     actors: {},
     genres: [],
-    private: false,
+    private: true,
 };
 
-let numberOfFilms = +prompt("Сколько фильмов вы уже посмотрели?", "");
+function start() {
+    numberOfFilms = +prompt("Сколько фильмов вы уже посмотрели?", "");
 
-personalMovieDB.count = numberOfFilms;
-
-let i = 2;
-while (i > 0) {
-    const lastSeenFilmName = prompt("Один из последних просмотренных фильмов?", ""),
-        lastSeenFilmEstimate = prompt("На сколько оцените его?", "");
-    if (lastSeenFilmName == null || lastSeenFilmName == "" || lastSeenFilmName.length > 50 ||
-        lastSeenFilmEstimate == null || lastSeenFilmEstimate == "") {
-        console.log("Ошибка. Вводите непустую строку до 50 символов!");
-        continue;
-    } else {
-        personalMovieDB.movies[lastSeenFilmName] = lastSeenFilmEstimate;
-        i--;
+    while(numberOfFilms == " "|| numberOfFilms == null || isNaN(numberOfFilms)) {
+        numberOfFilms = +prompt("Сколько фильмов вы уже посмотрели?", "");
     }
 }
 
-if (personalMovieDB.count < 10 && personalMovieDB.count >= 0) {
-    console.log("Просмотрено довольно мало фильмов");
-} else if ((personalMovieDB.count >= 10) && (personalMovieDB.count <= 30)) {
-    console.log("Вы классический зритель");
-} else if (personalMovieDB.count > 30) {
-    console.log("Вы киноман");
-} else {
-    console.log("Произошла ошибка");
+start();
+
+personalMovieDB.count = numberOfFilms;
+
+function rememberMyFilms() {
+    let i = 2;
+    while (i > 0) {
+        const lastSeenFilmName = prompt("Один из последних просмотренных фильмов?", ""),
+            lastSeenFilmEstimate = prompt("На сколько оцените его?", "");
+        if (lastSeenFilmName == null || lastSeenFilmName == "" || lastSeenFilmName.length > 50 ||
+            lastSeenFilmEstimate == null || lastSeenFilmEstimate == "") {
+            console.log("Ошибка. Вводите непустую строку до 50 символов!");
+            continue;
+        } else {
+            personalMovieDB.movies[lastSeenFilmName] = lastSeenFilmEstimate;
+            i--;
+        }
+    }
 }
 
-console.log(personalMovieDB);
+rememberMyFilms();
+
+function detectPersonalLevel() {
+    if (personalMovieDB.count < 10 && personalMovieDB.count >= 0) {
+        console.log("Просмотрено довольно мало фильмов");
+    } else if ((personalMovieDB.count >= 10) && (personalMovieDB.count <= 30)) {
+        console.log("Вы классический зритель");
+    } else if (personalMovieDB.count > 30) {
+        console.log("Вы киноман");
+    } else {
+        console.log("Произошла ошибка");
+    }
+}
+
+detectPersonalLevel();
+
+function writeYourGenres() {
+    let i = 0;
+    while (i < 3) {
+        const yourFavouriteGenre = prompt(`Ваш любимый жанр под номером ${i + 1}`, "");
+        if (yourFavouriteGenre == null || yourFavouriteGenre == "" || yourFavouriteGenre.length > 50) {
+            console.log("Ошибка. Вводите непустую строку до 50 символов!");
+            continue;
+        } else {
+            personalMovieDB.genres[i] = yourFavouriteGenre;
+            i++;
+        }
+    }
+}
+
+writeYourGenres();
+
+function showMyDB(hidden) {
+    if (!hidden) {
+        console.log(personalMovieDB);
+    }
+}
+
+showMyDB(personalMovieDB.private);
 
 }());
