@@ -64,7 +64,6 @@ const personalMovieDB = {
                 continue;
             } else {
                 personalMovieDB.genres = genres.split(", ").sort();
-
                 i++;
             }
         }
@@ -85,7 +84,6 @@ const personalMovieDB = {
             personalMovieDB.private = false;
         }
     }
-
 };
 
 personalMovieDB.start();
