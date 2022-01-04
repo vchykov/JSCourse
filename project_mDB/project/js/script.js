@@ -1,54 +1,99 @@
 /* Задания на урок:
 
-1) Удалить все рекламные блоки со страницы (правая часть сайта)
+1) Реализовать функционал, что после заполнения формы и нажатия кнопки "Подтвердить" - 
+новый фильм добавляется в список. Страница не должна перезагружаться.
+Новый фильм должен добавляться в movieDB.movies.
+Для получения доступа к значению input - обращаемся к нему как input.value;
+P.S. Здесь есть несколько вариантов решения задачи, принимается любой, но рабочий.
 
-2) Изменить жанр фильма, поменять "комедия" на "драма"
+2) Если название фильма больше, чем 21 символ - обрезать его и добавить три точки
 
-3) Изменить задний фон постера с фильмом на изображение "bg.jpg". Оно лежит в папке img.
-Реализовать только при помощи JS
+3) При клике на мусорную корзину - элемент будет удаляться из списка (сложно)
 
-4) Список фильмов на странице сформировать на основании данных из этого JS файла.
-Отсортировать их по алфавиту 
+4) Если в форме стоит галочка "Сделать любимым" - в консоль вывести сообщение: 
+"Добавляем любимый фильм"
 
-5) Добавить нумерацию выведенных фильмов */
+5) Фильмы должны быть отсортированы по алфавиту */
 
 'use strict';
 
-const movieDB = {
-    movies: [
-        "Логан",
-        "Лига справедливости",
-        "Ла-ла лэнд",
-        "Одержимость",
-        "Скотт Пилигрим против..."
-    ]
-};
+//document.addEventListener('DOMContentLoaded', () => {
 
-// 1)
-document.querySelectorAll(".promo__adv img").forEach((item) => {
-     item.remove();
- });
+    const movieDB = {
+        movies: [
+            "Логан",
+            "Лига справедливости",
+            "Ла-ла лэнд",
+            "Одержимость",
+            "Скотт Пилигрим против..."
+        ]
+    };
+    
+    const adv = document.querySelectorAll('.promo__adv img'),
+          poster = document.querySelector('.promo__bg'),
+          genre = poster.querySelector('.promo__genre'),
+          movieList = document.querySelector('.promo__interactive-list'),
+          form = document.querySelector('form.add'),
+          input = form.querySelector('.adding__input'),
+          checkbox = form.querySelector('[type="checkbox"]');
+    
+    
+    function preparePage() {
+        adv.forEach(item => {
+            item.remove();
+        });
 
-// 2)
-document.querySelector(".promo__content .promo__bg .promo__genre").textContent = "драма";
+        genre.textContent = 'драма';
 
-// 3) Вызволо ступор поиск тех самых свойств
-document.querySelector(".promo__content .promo__bg").style.backgroundImage = "url(img/bg.jpg)";
+        poster.style.backgroundImage = 'url("img/bg.jpg")';
 
-// 4) & 5)
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-const interactiveList = document.querySelector(".promo__interactive .promo__interactive-list"),
-      interactiveListItem = interactiveList.querySelector(".promo__interactive-item"), 
-      interactiveListItemDel = interactiveListItem.querySelector(".delete");
-      
-document.querySelectorAll(
-    ".promo__interactive .promo__interactive-list .promo__interactive-item"
-    ).forEach(item => {
-        item.remove();
-    });
+            let str = input.value;
+            if (str) {
+                if (str.length > 21) {
+                    str = `${str.slice(0, 21)}...`;
+                }
+                if (checkbox.checked) {
+                    console.log('Добавляем любимый фильм');
+                }
+                movieDB.movies.push(str);
+                updateMovieList();
+                form.reset();
+            }
+        });
+    }
 
-movieDB.movies.sort().forEach((movie, index) => {
-    interactiveListItem.textContent = `${index + 1} -  ${movie}`;
-    interactiveListItem.appendChild(interactiveListItemDel.cloneNode(true));
-    interactiveList.appendChild(interactiveListItem.cloneNode(true));
-});
+   
+    function updateMovieList() {
+        movieList.innerHTML = "";
+
+        movieDB.movies.sort();
+
+        movieDB.movies.forEach((film, i) => {
+            movieList.innerHTML += `
+            <li class="promo__interactive-item">${i + 1} ${film}
+                <div class="delete"></div>
+            </li>
+        `;
+        });
+
+        movieList.querySelectorAll('.delete').forEach((item, index) => {
+            item.addEventListener('click', (e) => {
+                e.target.parentNode.remove();
+                movieDB.movies.splice(index, 1);
+                updateMovieList();
+            });
+        });
+    }
+    
+    preparePage();
+    updateMovieList();
+    
+
+
+
+    
+
+//});
