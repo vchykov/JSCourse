@@ -59,41 +59,37 @@ P.S. Здесь есть несколько вариантов решения з
                     console.log('Добавляем любимый фильм');
                 }
                 movieDB.movies.push(str);
-                updateMovieList();
+                updateMovieList(movieDB.movies, movieList);
                 form.reset();
             }
         });
     }
 
    
-    function updateMovieList() {
-        movieList.innerHTML = "";
+    function updateMovieList(films, parent) {
+        parent.innerHTML = "";
 
-        movieDB.movies.sort();
+        films.sort();
 
-        movieDB.movies.forEach((film, i) => {
-            movieList.innerHTML += `
+        films.forEach((film, i) => {
+            parent.innerHTML += `
             <li class="promo__interactive-item">${i + 1} ${film}
                 <div class="delete"></div>
             </li>
         `;
         });
 
-        movieList.querySelectorAll('.delete').forEach((item, index) => {
+        parent.querySelectorAll('.delete').forEach((item, index) => {
             item.addEventListener('click', (e) => {
-                e.target.parentNode.remove();
-                movieDB.movies.splice(index, 1);
-                updateMovieList();
+                item.parentNode.remove();
+                films.splice(index, 1);
+                updateMovieList(movieDB.movies, movieList);
             });
         });
     }
     
     preparePage();
-    updateMovieList();
-    
-
-
-
-    
+    updateMovieList(movieDB.movies, movieList);
+     
 
 //});
