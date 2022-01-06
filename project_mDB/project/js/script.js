@@ -17,7 +17,7 @@ P.S. Здесь есть несколько вариантов решения з
 
 'use strict';
 
-//document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
 
     const movieDB = {
         movies: [
@@ -79,10 +79,10 @@ P.S. Здесь есть несколько вариантов решения з
         `;
         });
 
-        parent.querySelectorAll('.delete').forEach((item, index) => {
-            item.addEventListener('click', (e) => {
-                item.parentNode.remove();
-                films.splice(index, 1);
+        parent.querySelectorAll('.delete').forEach((btn, i) => {
+            btn.addEventListener('click', (e) => {
+                btn.parentNode.remove();
+                films.splice(i, 1);
                 updateMovieList(movieDB.movies, movieList);
             });
         });
@@ -90,6 +90,5 @@ P.S. Здесь есть несколько вариантов решения з
     
     preparePage();
     updateMovieList(movieDB.movies, movieList);
-     
 
-//});
+});
