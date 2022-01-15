@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         tabs.forEach(tab => {
             tab.classList.remove('tabheader__item_active');
-        })
+        });
     }
 
     function showTabContent(i = 0) {
@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     // Timer
-    const deadline = '2022-01-13T00:00:00';
+    const deadline = '2022-01-16T00:00:00';
 
     function getTimeRemaining(endTime) {
         const total = Date.parse(endTime) - Date.now(),
@@ -211,11 +211,63 @@ window.addEventListener('DOMContentLoaded', () => {
             "menu__item",
             "big"
         ]
-    ]
+    ];
 
     defaultMenu.forEach((item) => {
         new MenuCard(...item).render();
     });
  
+    // Forms
+
+    const forms = document.querySelectorAll('form');
+
+    const message = {
+        loading: 'Loading...',
+        success: 'Thanks! We will contact you soon.',
+        failure: 'Something went wrong...'
+    };
+
+    forms.forEach(item => {
+        postData(item);
+    });
+
+    function postData(form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const statusMessage = document.createElement('div');
+            statusMessage.classList.add('status');
+            statusMessage.textContent = message.loading;
+            form.append(statusMessage);
+
+            const request = new XMLHttpRequest();
+            request.open('POST', '/JSCourse/Food_dist/server.php');
+
+            request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+            const formData = new FormData(form);
+
+            const object = {};
+            formData.forEach(function(value, key){
+                object[key] = value;
+            });
+
+            const json = JSON.stringify(object);
+
+            request.send(json);
+
+            request.addEventListener('load', () => {
+                if (request.status === 200) {
+                    console.log(request.response);
+                    statusMessage.textContent = message.success;
+                    form.reset();
+                    setTimeout(()=> {
+                        statusMessage.remove();
+                    }, 2000);
+                } else {
+                    statusMessage.textContent = message.failure;
+                }
+            });
+        });
+    }
 
 });
