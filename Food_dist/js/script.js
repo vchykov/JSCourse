@@ -111,7 +111,7 @@ window.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = '';
     }
 
-    
+
     modalWindow.addEventListener('click', (e) => {
         if (e.target === modalWindow || e.target.getAttribute('data-close') == '') {
             closeModal();
@@ -162,7 +162,7 @@ window.addEventListener('DOMContentLoaded', () => {
             } else {
                 this.classes.forEach(className => element.classList.add(className));
             }
-           
+
             element.innerHTML = `
                 <img src=${this.src} alt=${this.alt}>
                 <h3 class="menu__item-subtitle">Меню "${this.title}"</h3>
@@ -214,7 +214,7 @@ window.addEventListener('DOMContentLoaded', () => {
     defaultMenu.forEach((item) => {
         new MenuCard(...item).render();
     });
- 
+
     // Forms
 
     const forms = document.querySelectorAll('form');
@@ -224,6 +224,9 @@ window.addEventListener('DOMContentLoaded', () => {
         success: 'Спасибо! Скоро мы с Вами свяжемся',
         failure: 'Что-то пошло не так...'
     };
+
+    const tempImg = document.createElement('img');
+    tempImg.src = message.loading; // Cash spinner
 
     forms.forEach(item => {
         postData(item);
@@ -241,12 +244,7 @@ window.addEventListener('DOMContentLoaded', () => {
             `;
             //form.append(statusMessage);
             form.insertAdjacentElement('afterend', statusMessage);
-            
 
-            const request = new XMLHttpRequest();
-            request.open('POST', '/JSCourse/Food_dist/server.php');
-
-            request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
             const formData = new FormData(form);
 
             const object = {};
@@ -254,19 +252,32 @@ window.addEventListener('DOMContentLoaded', () => {
                 object[key] = value;
             });
 
-            const json = JSON.stringify(object);
-
-            request.send(json);
-
-            request.addEventListener('load', () => {
-                if (request.status === 200) {
-                    console.log(request.response);
+            fetch('/JSCourse/Food_dist/server.php', {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(object)
+            })
+            .then(data => {
+                if (data.ok) {
                     showThanksModal(message.success);
-                    form.reset();
                     statusMessage.remove();
+                    return data;
                 } else {
-                    showThanksModal(message.failure);
+                    throw new Error('Status of the response is not ok');
                 }
+            })
+            .then(data => data.text())         
+            .then(data => {
+                console.log(data);
+                return data;})
+            .catch(() => {
+                showThanksModal(message.failure); 
+                statusMessage.remove();
+            })
+            .finally(() => {
+                form.reset();
             });
         });
     }
@@ -293,10 +304,7 @@ window.addEventListener('DOMContentLoaded', () => {
             prevModalDialog.classList.remove('hide');
             closeModal();
         }, 4000);
-
-
     }
-
 
 
 });
