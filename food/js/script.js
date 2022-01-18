@@ -252,7 +252,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 object[key] = value;
             });
 
-            fetch('/JSCourse/Food_dist/server.php', {
+            fetch('/JSCourse/food/server.php', {
                 method: "POST",
                 headers: {
                     'Content-type': 'application/json'
