@@ -177,43 +177,46 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    const getResource = async (url) => {
+        const res = await fetch(url);
 
-    const defaultMenu = [
-        [
-            "img/tabs/vegy.jpg",
-            "vegy",
-            "Фитнес",
-            'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
-            9,
-            ".menu .container",
-            "menu__item",
-            "big"
-        ],
-        [
-            "img/tabs/elite.jpg",
-            "elite",
-            "Премиум",
-            'В меню “Премиум” мы используем  не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
-            20,
-            ".menu .container",
-            "menu__item",
-            "big"
-        ],
-        [
-            "img/tabs/post.jpg",
-            "post",
-            "Постное",
-            'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',
-            16,
-            ".menu .container",
-            "menu__item",
-            "big"
-        ]
-    ];
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${url}, status: ${res.status}`);
+        }
 
-    defaultMenu.forEach((item) => {
-        new MenuCard(...item).render();
-    });
+        return await res.json(); 
+    };
+
+    getResource('http://localhost:3000/menu')
+        .then(data => {
+            data.forEach(({img, altimg, title, descr, price}) => {
+                new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+            });
+        });
+
+    // getResource('http://localhost:3000/menu')
+    //     .then(data => createCard(data));
+
+    // function createCard(data) {
+    //     data.forEach(({img, altimg, title, descr, price}) => {
+    //         const element = document.createElement('div');
+
+    //         element.classList.add('menu__item');
+
+    //         element.innerHTML = `
+    //             <img src=${img} alt=${altimg}>
+    //             <h3 class="menu__item-subtitle">Меню "${title}"</h3>
+    //             <div class="menu__item-descr">${descr}</div>
+    //             <div class="menu__item-divider"></div>
+    //             <div class="menu__item-price">
+    //                 <div class="menu__item-cost">Цена:</div>
+    //                 <div class="menu__item-total"><span>${price}</span> грн/день</div>
+    //             </div> 
+    //         `;
+
+    //         document.querySelector('.menu .container').append(element);
+    //     });
+    // }
 
     // Forms
 
@@ -229,10 +232,23 @@ window.addEventListener('DOMContentLoaded', () => {
     tempImg.src = message.loading; // Cash spinner
 
     forms.forEach(item => {
-        postData(item);
+        bindPostData(item);
     });
 
-    function postData(form) {
+    const postData = async (url, data) => {
+        const res = await fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: data
+        });
+
+        return await res.json(); 
+    };
+
+
+    function bindPostData(form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -247,31 +263,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
             const formData = new FormData(form);
 
-            const object = {};
-            formData.forEach(function(value, key){
-                object[key] = value;
-            });
+            const json = JSON.stringify(Object.fromEntries(formData.entries()));
 
-            fetch('/JSCourse/food/server.php', {
-                method: "POST",
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify(object)
-            })
+            postData('http://localhost:3000/requests', json)
             .then(data => {
-                if (data.ok) {
-                    showThanksModal(message.success);
-                    statusMessage.remove();
-                    return data;
-                } else {
-                    throw new Error('Status of the response is not ok');
-                }
-            })
-            .then(data => data.text())         
-            .then(data => {
+                showThanksModal(message.success);
+                statusMessage.remove();
                 console.log(data);
-                return data;})
+            })            
             .catch(() => {
                 showThanksModal(message.failure); 
                 statusMessage.remove();
