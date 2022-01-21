@@ -36,6 +36,77 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Slider
+    const slidesCounter = document.querySelector('.offer__slider-counter'),
+          slides = document.querySelectorAll('.offer__slide');
+
+
+    function setSlideCounter(i = 0) {
+        slidesCounter.querySelector('#current').textContent = addZero(i + 1);
+        slidesCounter.querySelector('#total').textContent = addZero(slides.length);
+    }      
+
+    function getSlideCounter() {
+        return parseInt(slidesCounter.querySelector('#current').textContent) - 1;
+    }
+
+    function setSlideCounterPrev() {
+        let currentSlide = getSlideCounter();
+        if (currentSlide <= 0) {
+            currentSlide = slides.length - 1;
+        } else {
+            currentSlide--;
+            
+        }
+        setSlideCounter(currentSlide);
+    }
+
+    function setSlideCounterNext() {
+        let currentSlide = getSlideCounter();
+        if (currentSlide >= slides.length - 1) {
+            currentSlide = 0;
+        } else {
+            currentSlide++;
+            
+        }
+        setSlideCounter(currentSlide);
+    }
+
+    function hideSlidesContent() {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('show', 'fade');
+            slide.classList.add('hide');
+        });
+    }
+
+    function showSlideContent(i = 0) {
+        slides[i].classList.remove('hide');
+        slides[i].classList.add('show', 'fade');
+    }
+
+    setSlideCounter();
+    hideSlidesContent();
+    showSlideContent();
+
+    slidesCounter.addEventListener('click', (event) => {
+        const target = event.target;
+        
+        if (target && target.closest('.offer__slider-prev')) {
+            hideSlidesContent();
+            setSlideCounterPrev();
+            showSlideContent(getSlideCounter());
+        }
+
+        if (target && target.closest('.offer__slider-next')) {
+            hideSlidesContent();
+            setSlideCounterNext();
+            showSlideContent(getSlideCounter());
+        }
+
+    });
+
+
+
     // Timer
     const deadline = '2022-01-16T00:00:00';
 
@@ -110,7 +181,6 @@ window.addEventListener('DOMContentLoaded', () => {
         modalWindow.classList.remove('show');
         document.body.style.overflow = '';
     }
-
 
     modalWindow.addEventListener('click', (e) => {
         if (e.target === modalWindow || e.target.getAttribute('data-close') == '') {
@@ -187,36 +257,12 @@ window.addEventListener('DOMContentLoaded', () => {
         return await res.json(); 
     };
 
-    getResource('http://localhost:3000/menu')
+    axios.get('http://localhost:3000/menu')
         .then(data => {
-            data.forEach(({img, altimg, title, descr, price}) => {
+            data.data.forEach(({img, altimg, title, descr, price}) => {
                 new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
-            });
         });
-
-    // getResource('http://localhost:3000/menu')
-    //     .then(data => createCard(data));
-
-    // function createCard(data) {
-    //     data.forEach(({img, altimg, title, descr, price}) => {
-    //         const element = document.createElement('div');
-
-    //         element.classList.add('menu__item');
-
-    //         element.innerHTML = `
-    //             <img src=${img} alt=${altimg}>
-    //             <h3 class="menu__item-subtitle">Меню "${title}"</h3>
-    //             <div class="menu__item-descr">${descr}</div>
-    //             <div class="menu__item-divider"></div>
-    //             <div class="menu__item-price">
-    //                 <div class="menu__item-cost">Цена:</div>
-    //                 <div class="menu__item-total"><span>${price}</span> грн/день</div>
-    //             </div> 
-    //         `;
-
-    //         document.querySelector('.menu .container').append(element);
-    //     });
-    // }
+    });
 
     // Forms
 
@@ -247,7 +293,6 @@ window.addEventListener('DOMContentLoaded', () => {
         return await res.json(); 
     };
 
-
     function bindPostData(form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -258,7 +303,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 display: block;
                 margin: 0 auto;
             `;
-            //form.append(statusMessage);
+
             form.insertAdjacentElement('afterend', statusMessage);
 
             const formData = new FormData(form);
@@ -304,9 +349,5 @@ window.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }, 4000);
     }
-
-    fetch('http://localhost:3000/menu')
-        .then(data => data.json())
-        .then(res => console.log(res));
 
 });
