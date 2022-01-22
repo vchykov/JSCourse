@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const tabsContent = document.querySelectorAll('.tabcontent'),
         tabs = document.querySelectorAll('.tabheader__item'),
         tabsParent = document.querySelector('.tabheader__items');
-
+        
     function hideTabsContent() {
         tabsContent.forEach((tab, i) => {
             tab.classList.remove('show', 'fade');
@@ -36,79 +36,12 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Slider
-    const slidesCounter = document.querySelector('.offer__slider-counter'),
-          slides = document.querySelectorAll('.offer__slide');
-
-
-    function setSlideCounter(i = 0) {
-        slidesCounter.querySelector('#current').textContent = addZero(i + 1);
-        slidesCounter.querySelector('#total').textContent = addZero(slides.length);
-    }      
-
-    function getSlideCounter() {
-        return parseInt(slidesCounter.querySelector('#current').textContent) - 1;
-    }
-
-    function setSlideCounterPrev() {
-        let currentSlide = getSlideCounter();
-        if (currentSlide <= 0) {
-            currentSlide = slides.length - 1;
-        } else {
-            currentSlide--;
-            
-        }
-        setSlideCounter(currentSlide);
-    }
-
-    function setSlideCounterNext() {
-        let currentSlide = getSlideCounter();
-        if (currentSlide >= slides.length - 1) {
-            currentSlide = 0;
-        } else {
-            currentSlide++;
-            
-        }
-        setSlideCounter(currentSlide);
-    }
-
-    function hideSlidesContent() {
-        slides.forEach((slide, i) => {
-            slide.classList.remove('show', 'fade');
-            slide.classList.add('hide');
-        });
-    }
-
-    function showSlideContent(i = 0) {
-        slides[i].classList.remove('hide');
-        slides[i].classList.add('show', 'fade');
-    }
-
-    setSlideCounter();
-    hideSlidesContent();
-    showSlideContent();
-
-    slidesCounter.addEventListener('click', (event) => {
-        const target = event.target;
-        
-        if (target && target.closest('.offer__slider-prev')) {
-            hideSlidesContent();
-            setSlideCounterPrev();
-            showSlideContent(getSlideCounter());
-        }
-
-        if (target && target.closest('.offer__slider-next')) {
-            hideSlidesContent();
-            setSlideCounterNext();
-            showSlideContent(getSlideCounter());
-        }
-
+    tabsParent.addEventListener('mousedown', (e) => {
+        e.preventDefault();
     });
 
-
-
     // Timer
-    const deadline = '2022-01-16T00:00:00';
+    const deadline = '2022-01-23T00:00:00';
 
     function getTimeRemaining(endTime) {
         const total = Date.parse(endTime) - Date.now(),
@@ -350,4 +283,53 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 4000);
     }
 
+    // Slider
+
+    let slideIndex = 1;
+
+    const slides = document.querySelectorAll('.offer__slide'),
+          next = document.querySelector('.offer__slider-next'),
+          total = document.querySelector('#total'),
+          current = document.querySelector('#current'),
+          prev = document.querySelector('.offer__slider-prev'),
+          slider = document.querySelector('.offer__slider');
+
+    total.textContent = addZero(slides.length);
+            
+    showSlides(slideIndex);
+
+    function showSlides(n) {
+        if (n > slides.length) {
+            slideIndex = 1;
+        }
+        if (n < 1) {
+            slideIndex = slides.length;
+        }
+
+        slides.forEach(item => {
+            item.classList.remove('show', 'fade');
+            item.classList.add('hide');
+        });
+        slides[slideIndex - 1].classList.remove('hide');
+        slides[slideIndex - 1].classList.add('show', 'fade');
+
+        current.textContent = addZero(slideIndex);
+    }
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    prev.addEventListener('click', () => {
+        plusSlides(-1);
+    });
+
+    next.addEventListener('click', () => {
+        plusSlides(1);
+    });
+
+    slider.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+    });
+    
 });
