@@ -1,15 +1,15 @@
 import {addZero} from './timer';
 
-function slider() {
+function slider({container, slide, nextArrow, prevArrow, totalCounter, currentCounter,wrapper, field}) {
 
-    const slides = document.querySelectorAll('.offer__slide'),
-        slider = document.querySelector('.offer__slider'),
-        next = document.querySelector('.offer__slider-next'),
-        total = document.querySelector('#total'),
-        current = document.querySelector('#current'),
-        prev = document.querySelector('.offer__slider-prev'),
-        slidesWrapper = document.querySelector('.offer__slider-wrapper'),
-        slidesFields = document.querySelector('.offer__slider-inner'),
+    const slides = document.querySelectorAll(slide),
+        slider = document.querySelector(container),
+        next = document.querySelector(nextArrow),
+        total = document.querySelector(totalCounter),
+        current = document.querySelector(currentCounter),
+        prev = document.querySelector(prevArrow),
+        slidesWrapper = document.querySelector(wrapper),
+        slidesFields = document.querySelector(field),
         width = window.getComputedStyle(slidesWrapper).width;
 
     let slideIndex = 1;

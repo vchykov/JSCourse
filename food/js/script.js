@@ -8,17 +8,25 @@ import calc from './modules/calc';
 import {openModal} from './modules/modal';
 
 window.addEventListener('DOMContentLoaded', () => {
-    const deadline = '2022-01-28',
-        selectorModal = '.modal',
+    const selectorModal = '.modal',
         modalTimerId = setTimeout(() => {
             openModal(modalTimerId, selectorModal);
         }, 50000);
 
-    tabs(),
-    timer(deadline), 
-    cards(), 
-    forms(modalTimerId, selectorModal), 
-    modal(modalTimerId, selectorModal),
-    slider(), 
+    tabs('.tabcontent', '.tabheader__item', '.tabheader__items');
+    modal(modalTimerId, selectorModal, '[data-modal]');
+    timer('2022-01-28', '.timer'); 
+    cards();
     calc();
+    forms(modalTimerId, selectorModal);
+    slider({
+        container: '.offer__slider',
+        slide: '.offer__slide',
+        nextArrow: '.offer__slider-next',
+        prevArrow: '.offer__slider-prev',
+        totalCounter: '#total',
+        currentCounter: '#current',
+        wrapper: '.offer__slider-wrapper',
+        field: '.offer__slider-inner'
+    }); 
 });

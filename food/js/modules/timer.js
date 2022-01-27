@@ -6,7 +6,7 @@ export function addZero(num) {
     }
 }
 
-function timer(deadline) {
+function timer(deadline, selectorTimer) {
 
     function getTimeRemaining(endTime) {
         const total = Date.parse(endTime) - Date.now(),
@@ -48,7 +48,7 @@ function timer(deadline) {
         }
     }
 
-    setTimer('.timer', deadline);
+    setTimer(selectorTimer, deadline);
 }
 
 export default timer;
