@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', () => {
             openModal(modalTimerId, selectorModal);
         }, 50000);
 
-    tabs('.tabcontent', '.tabheader__item', '.tabheader__items');
+    tabs('.tabheader__item', '.tabcontent', '.tabheader__items', 'tabheader__item_active');
     modal(modalTimerId, selectorModal, '[data-modal]');
     timer('2022-01-28', '.timer'); 
     cards();
