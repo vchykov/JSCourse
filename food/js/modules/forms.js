@@ -1,6 +1,8 @@
-function forms() {
+import {openModal, closeModal} from './modal';
 
-    const forms = document.querySelectorAll('form');
+function forms(modalTimerId, selectorModal) {
+
+    const form = document.querySelectorAll('form');
 
     const message = {
         loading: 'img/form/spinner.svg',
@@ -11,7 +13,7 @@ function forms() {
     const tempImg = document.createElement('img');
     tempImg.src = message.loading; // Cash spinner
 
-    forms.forEach(item => {
+    form.forEach(item => {
         bindPostData(item);
     });
 
@@ -64,7 +66,7 @@ function forms() {
         const prevModalDialog = document.querySelector('.modal__dialog');
 
         prevModalDialog.classList.add('hide');
-        openModal();
+        openModal(modalTimerId, selectorModal);
 
         const thanksModal = document.createElement('div');
         thanksModal.classList.add('modal__dialog');
@@ -80,56 +82,11 @@ function forms() {
             thanksModal.remove();
             prevModalDialog.classList.add('show');
             prevModalDialog.classList.remove('hide');
-            closeModal();
+            closeModal(selectorModal);
         }, 4000);
     }
 
-    // Modal
-
-    const modalWindow = document.querySelector('.modal'),
-        modalShowBtns = document.querySelectorAll('[data-modal]');
-
-    function openModal() {
-        modalWindow.classList.add('show');
-        modalWindow.classList.remove('hide');
-        document.body.style.overflow = 'hidden';
-        clearInterval(modalTimerId);
-    }
-
-    modalShowBtns.forEach(btn => {
-        btn.addEventListener('click', openModal);
-    });
-
-    function closeModal() {
-        modalWindow.classList.add('hide');
-        modalWindow.classList.remove('show');
-        document.body.style.overflow = '';
-    }
-
-    modalWindow.addEventListener('click', (e) => {
-        if (e.target === modalWindow || e.target.getAttribute('data-close') == '') {
-            closeModal();
-        }
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if (e.code === "Escape" && modalWindow.classList.contains('show')) {
-            closeModal();
-        }
-    });
-
-    const modalTimerId = setTimeout(openModal, 50000);
-
-    function showModalByScroll() {
-        if (window.pageYOffset + document.documentElement.clientHeight >=
-            document.documentElement.scrollHeight - 1) {
-            openModal();
-            window.removeEventListener('scroll', showModalByScroll);
-        }
-    }
-
-    window.addEventListener('scroll', showModalByScroll);
-
+    
 }
 
-module.exports = forms;
+export default forms;

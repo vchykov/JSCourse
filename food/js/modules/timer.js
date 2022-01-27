@@ -1,12 +1,12 @@
-function timer() {
-    const deadline = getDeadline();
-
-    function getDeadline() {
-        const dl = new Date();
-        dl.setHours(dl.getHours() + 24);
-        dl.setHours(0, 0, 0, 0);
-        return dl;
+export function addZero(num) {
+    if (num <= 9 && num >= 0) {
+        return `0${num}`;
+    } else {
+        return num;
     }
+}
+
+function timer(deadline) {
 
     function getTimeRemaining(endTime) {
         const total = Date.parse(endTime) - Date.now(),
@@ -24,21 +24,13 @@ function timer() {
         };
     }
 
-    function addZero(num) {
-        if (num <= 9 && num >= 0) {
-            return `0${num}`;
-        } else {
-            return num;
-        }
-    }
-
     function setTimer(selector, endTime) {
         const timer = document.querySelector(selector),
             days = timer.querySelector('#days'),
             hours = timer.querySelector('#hours'),
             minutes = timer.querySelector('#minutes'),
-            seconds = timer.querySelector('#seconds');
-        timeInterval = setInterval(updateClock, 1000);
+            seconds = timer.querySelector('#seconds'),
+            timeInterval = setInterval(updateClock, 1000);
 
         updateClock();
 
@@ -59,4 +51,4 @@ function timer() {
     setTimer('.timer', deadline);
 }
 
-module.exports = timer;
+export default timer;

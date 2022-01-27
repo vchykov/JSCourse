@@ -1,3 +1,5 @@
+import {addZero} from './timer';
+
 function slider() {
 
     const slides = document.querySelectorAll('.offer__slide'),
@@ -70,14 +72,6 @@ function slider() {
         dots.push(dot);
     }
 
-    function addZero(num) {
-        if (num <= 9 && num >= 0) {
-            return `0${num}`;
-        } else {
-            return num;
-        }
-    }
-
     function updateSlider() {
         current.textContent = addZero(slideIndex);
 
@@ -136,4 +130,4 @@ function slider() {
 
 }
 
-module.exports = slider;
+export default slider;
