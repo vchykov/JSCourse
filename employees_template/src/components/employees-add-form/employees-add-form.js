@@ -19,10 +19,11 @@ class EmployeesAddForm extends Component {
 
     onAdd = (e) => {
         e.preventDefault();
-        if (this.state.name.trim() === '' || this.state.salary === '') {
-            return;
+        if (this.state.name.trim().length >= 3 &&  
+            !isNaN(parseFloat(this.state.salary)) && 
+            isFinite(this.state.salary)) {
+                this.props.onAdd(this.state.name, this.state.salary); 
         }
-        this.props.onAdd(this.state.name, this.state.salary); 
     }
    
     render() {
