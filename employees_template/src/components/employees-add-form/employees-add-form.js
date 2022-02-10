@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import nextId from 'react-id-generator';
 
 import './employees-add-form.css';
 
@@ -18,15 +17,12 @@ class EmployeesAddForm extends Component {
         })
     }
 
-    onAdd = () => {
+    onAdd = (e) => {
+        e.preventDefault();
         if (this.state.name.trim() === '' || this.state.salary === '') {
             return;
         }
-        this.props.onAdd({
-            name: this.state.name, 
-            salary: this.state.salary, 
-            increase: false, 
-            id: nextId()});
+        this.props.onAdd(this.state.name, this.state.salary); 
     }
    
     render() {
@@ -50,7 +46,7 @@ class EmployeesAddForm extends Component {
                         value={salary}
                         onChange={this.onValueChange}/>
 
-                    <button type="button"
+                    <button type="submit"
                             className="btn btn-outline-light"
                             onClick={this.onAdd}
                             >Добавить</button>

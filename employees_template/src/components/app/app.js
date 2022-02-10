@@ -13,9 +13,9 @@ class App extends Component {
         super(props);
         this.state = {
             data: [
-                {name: 'John C.', salary: 800, increase: false, id: nextId()},
-                {name: 'Alex M.', salary: 3000, increase: true, id: nextId()},
-                {name: 'Carl W.', salary: 15000, increase: false, id: nextId()},
+                {name: 'John C.', salary: 800, increase: false, rise: true, id: nextId()},
+                {name: 'Alex M.', salary: 3000, increase: true, rise: false, id: nextId()},
+                {name: 'Carl W.', salary: 15000, increase: false, rise: false, id: nextId()},
             ]
         }  
     }
@@ -28,11 +28,17 @@ class App extends Component {
         })
     }
 
-    addItem = (newItem) => {
+    addItem = (name, salary) => {
+        const newItem = {
+            name: name, 
+            salary: salary, 
+            increase: false, 
+            id: nextId(),
+        }
 
         this.setState(({data}) => {
             return {
-                data: data.concat([newItem])
+                data: data.concat(newItem)
             }     
         })
     }

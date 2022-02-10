@@ -6,8 +6,8 @@ class EmployeesListItem extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            increase: false,
-            rise: false,
+            increase: props.increase,
+            rise: props.rise,
         }
     }
 
