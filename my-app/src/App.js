@@ -31,7 +31,7 @@ class WhoAmI extends Component {
 
 
         return (
-            <div>
+            <>
                 <button onClick={this.nextYear} >+++</button>
                 <h1>My name is {name}, surname - {surname}, 
                     age - {years},
@@ -41,10 +41,9 @@ class WhoAmI extends Component {
                     <span>Введите должность</span>
                     <input type="text" onChange={(e) => this.commitInputChanges(e, 'some color')} />
                 </form>
-            </div>
+            </>
         )
     }
-
 }
 
 function App() {
