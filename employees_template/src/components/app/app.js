@@ -16,7 +16,9 @@ class App extends Component {
                 {name: 'John C.', salary: 800, increase: false, rise: true, id: nextId()},
                 {name: 'Alex M.', salary: 3000, increase: true, rise: false, id: nextId()},
                 {name: 'Carl W.', salary: 15000, increase: false, rise: false, id: nextId()},
-            ]
+            ],
+            term: '',
+            filter: 'all'
         }  
     }
 
@@ -53,10 +55,53 @@ class App extends Component {
         }))
     }
 
+    searchEmp = (items, term) => {
+        if (term.length === 0) {
+            return items;
+        } 
+
+        return items.filter(item => {
+            return item.name.indexOf(term) > -1
+        })
+    }
+
+    filterPost = (items, filter) => {
+        switch (filter) {
+            case 'rise':
+                return items.filter(item => item.rise);
+            case 'increase':
+                return items.filter(item => item.increase);
+            case 'moreThen1000':
+                return items.filter(item => item.salary > 1000);
+            default:
+                return items;
+        }
+    }
+
+    onUpdateSearch = (term) => {
+        this.setState({term});
+    }
+
+    onFilterSelect = (filter) => {
+        this.setState({filter});
+    }
+
+    onChangeSalary = (id, salary) => {
+        this.setState(({data}) => ({
+            data: data.map(item => {
+                if (item.id === id) {
+                    return {...item, salary}
+                }
+                return item;
+            })
+        }))
+    }
 
     render() {
+        const {data, term, filter} = this.state;
         const employees = this.state.data.length;
         const increased = this.state.data.filter(item => item.increase === true).length;
+        const visibleData = this.filterPost(this.searchEmp(data, term), filter);
 
         return (
             <div className="app">
@@ -65,14 +110,15 @@ class App extends Component {
                     increased={increased}/>
 
                 <div className="search-panel">
-                    <SearchPanel/>
-                    <AppFilter/>
+                    <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
+                    <AppFilter filter={filter} onFilterSelect={this.onFilterSelect}/>
                 </div>
         
                 <EmployeesList 
-                    data={this.state.data}
+                    data={visibleData}
                     onDelete={this.deleteItem}
-                    onToggleProp={this.onToggleProp}/>
+                    onToggleProp={this.onToggleProp}
+                    onChangeSalary={this.onChangeSalary}/>
                 <EmployeesAddForm
                     onAdd={this.addItem}
                 />
