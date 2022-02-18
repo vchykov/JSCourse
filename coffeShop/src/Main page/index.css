@@ -1,0 +1,254 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --main-width: auto;
+}
+
+@font-face {
+    font-family: Merienda; 
+    src: url(./fonts/Merienda/Merienda-Regular.ttf); 
+    src: url(./fonts/Merienda/Merienda-Bold.ttf); 
+}
+
+body {
+    min-width: 580px;
+}
+
+.header {
+    width: var(--main-width);
+    height: 640px;
+    background-image: url(./img/bg/main-bg.jpg);
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-size: cover;
+}
+
+.header__nav-bar,
+.footer__nav-bar {
+    padding-left: 12.5%; 
+    padding-top: 52px;
+    width: auto;
+    height: 180px;
+    display:flex;
+}
+.footer__nav-bar {
+    height: 60px;
+    padding-top: 20px;
+}
+
+.footer__nav-bar {
+    padding-left:0px; 
+    justify-content: center;
+}
+
+.header__nav-link-wrapper,
+.footer__nav-link-wrapper {
+    width: auto;
+    height: 40px;
+
+}
+
+.header__nav-link-wrapper--with-logo,
+.footer__nav-link-wrapper--with-logo
+ {
+    width: auto;
+    height: 45px;
+    background-image: url(./img/logo/coffee-beans-white.svg);   
+    background-repeat: no-repeat;
+    background-position: top 5px;
+    
+}
+.footer__nav-link-wrapper--with-logo {
+    background-image: url(./img/logo/coffee-beans-black.svg);
+}
+
+.header__nav-link,
+.footer__nav-link {
+    margin: 0px;
+    padding: 0px;
+    margin-left: 40px;
+    /* width: auto;
+    height: 45px; */
+    font-family: Merienda;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 55px;
+    color: #FFFFFF;
+    vertical-align: bottom;
+    text-decoration: none;
+}
+.footer__nav-link {
+    color: #000000;
+}
+
+.header__separator-white {
+    width: var(--main-width);
+    height: 38px;
+    background-image: url(./img/logo/beans_logo_white.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.header__h1 {
+    margin-bottom: 0px;
+    width: var(--main-width);
+    /* height: 44px; */
+    text-align: center;
+    font-family: Merienda;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.header__point {
+    margin-top: 20px;
+    width: --main-width;
+    height: 30px;
+    text-align: center;
+    font-family: Merienda;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 35px;
+    color: #FFFFFF;
+}
+
+.header__more-wrapper {
+    margin-top: 20px;
+    width: var(--main-width);
+    height: 30px;
+    text-align: center;
+}
+
+.header__more-btn {
+    display: inline-block;
+    font-family: Merienda;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 5px 41.5px 5px 41.5px;
+    border: 1px solid white;
+    border-radius: 3px;
+}
+
+.main__section-about-us {
+    width: var(--main-width);
+    height: 520px;
+    background: #FFFFFF;
+    text-align: center;
+}
+
+.main__text-wrapper {
+    display:flex;
+    justify-content: center;
+}
+.main__text {
+    margin-top: 41px;
+    width: 589px;
+    height: 223px;
+    font-family: Merienda;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: #000000;
+}
+
+.main__separator-black,
+.footer__separator-black {
+    width: var(--main-width);
+    height: 30px;
+    background-image: url(./img/logo/beans_logo_black.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+.footer__separator-black {
+    margin: 30px;
+}
+
+.main__h2 {
+    padding-top: 80px;
+    margin-bottom: 0px;
+    width: var(--main-width);
+    height: 106px;
+    text-align: center;
+    font-family: Merienda;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    color: #000000;
+}
+
+.main__section-our-best {
+    width: var(--main-width);
+    height: 495px;
+    background-image: url(./img/bg/mask_group.jpg);
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-size: cover;
+}
+
+.main__wrapper {
+    margin-top: 50px;
+    display:flex;
+    justify-content: center;
+}
+
+.main__item {
+    flex-basis: 220px;
+    min-width: 215px;
+    height: 240px;
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: 8px;
+    margin-left: 2%;
+    margin-right: 2%;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    color: #000000;
+    
+}
+
+.main__item-name {
+    font-family: Merienda;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 40px;
+}
+
+.main__item-price {
+    font-family: Merienda;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: right;
+}
+
+.main__item-image-wrapper {
+    height: 145px; 
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.footer {
+    width: var(--main-width);
+    height: 150px;
+}
