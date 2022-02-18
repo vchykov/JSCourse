@@ -2,10 +2,10 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-}
-
-:root {
-    --main-width: auto;
+    font-family: Merienda;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
 }
 
 @font-face {
@@ -19,7 +19,6 @@ body {
 }
 
 .header {
-    width: var(--main-width);
     height: 640px;
     background-image: url(./img/bg/main-bg.jpg);
     background-repeat:no-repeat;
@@ -27,67 +26,49 @@ body {
     background-size: cover;
 }
 
-.header__nav-bar,
-.footer__nav-bar {
+.nav-bar {
     padding-left: 12.5%; 
     padding-top: 52px;
     width: auto;
     height: 180px;
     display:flex;
+    color: #FFFFFF;
 }
-.footer__nav-bar {
+.nav-bar--in-footer {
     height: 60px;
     padding-top: 20px;
-}
-
-.footer__nav-bar {
     padding-left:0px; 
     justify-content: center;
-}
-
-.header__nav-link-wrapper,
-.footer__nav-link-wrapper {
-    width: auto;
-    height: 40px;
-
-}
-
-.header__nav-link-wrapper--with-logo,
-.footer__nav-link-wrapper--with-logo
- {
-    width: auto;
-    height: 45px;
-    background-image: url(./img/logo/coffee-beans-white.svg);   
-    background-repeat: no-repeat;
-    background-position: top 5px;
-    
-}
-.footer__nav-link-wrapper--with-logo {
-    background-image: url(./img/logo/coffee-beans-black.svg);
-}
-
-.header__nav-link,
-.footer__nav-link {
-    margin: 0px;
-    padding: 0px;
-    margin-left: 40px;
-    /* width: auto;
-    height: 45px; */
-    font-family: Merienda;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 55px;
-    color: #FFFFFF;
-    vertical-align: bottom;
-    text-decoration: none;
-}
-.footer__nav-link {
     color: #000000;
 }
 
-.header__separator-white {
-    width: var(--main-width);
+.nav-bar__link-wrapper {
+    width: auto;
+    height: 45px;
+    background-repeat: no-repeat;
+    background-position: top 5px;
+
+}
+
+.nav-bar__link-wrapper--with-white-logo {
+    background-image: url(./img/logo/coffee-beans-white.svg);   
+}
+.nav-bar__link-wrapper--with-black-logo {
+    background-image: url(./img/logo/coffee-beans-black.svg);
+}
+
+.nav-bar__link {
+    margin: 0px;
+    padding: 0px;
+    margin-left: 40px;
+    font-size: 12px;
+    line-height: 55px;
+    vertical-align: bottom;
+    text-decoration: none;
+    color: inherit;
+}
+
+.separator {
     height: 38px;
     background-image: url(./img/logo/beans_logo_white.svg);
     background-repeat: no-repeat;
@@ -95,14 +76,13 @@ body {
     margin-top: 20px;
     margin-bottom: 15px;
 }
+.separator--black {
+    background-image: url(./img/logo/beans_logo_black.svg);
+}
 
-.header__h1 {
+.h1 {
     margin-bottom: 0px;
-    width: var(--main-width);
-    /* height: 44px; */
     text-align: center;
-    font-family: Merienda;
-    font-style: normal;
     font-weight: bold;
     font-size: 40px;
     color: #FFFFFF;
@@ -111,11 +91,8 @@ body {
 
 .header__point {
     margin-top: 20px;
-    width: --main-width;
     height: 30px;
     text-align: center;
-    font-family: Merienda;
-    font-style: normal;
     font-weight: bold;
     font-size: 24px;
     line-height: 35px;
@@ -131,8 +108,6 @@ body {
 
 .header__more-btn {
     display: inline-block;
-    font-family: Merienda;
-    font-style: normal;
     font-weight: bold;
     font-size: 14px;
     line-height: 20px;
@@ -144,7 +119,6 @@ body {
 }
 
 .main__section-about-us {
-    width: var(--main-width);
     height: 520px;
     background: #FFFFFF;
     text-align: center;
@@ -158,44 +132,21 @@ body {
     margin-top: 41px;
     width: 589px;
     height: 223px;
-    font-family: Merienda;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
     line-height: 20px;
     text-align: center;
     color: #000000;
 }
 
-.main__separator-black,
-.footer__separator-black {
-    width: var(--main-width);
-    height: 30px;
-    background-image: url(./img/logo/beans_logo_black.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-top: 20px;
-    margin-bottom: 15px;
-}
-.footer__separator-black {
-    margin: 30px;
-}
-
-.main__h2 {
+.h2 {
     padding-top: 80px;
     margin-bottom: 0px;
-    width: var(--main-width);
     height: 106px;
     text-align: center;
-    font-family: Merienda;
-    font-style: normal;
-    font-weight: normal;
     font-size: 24px;
     color: #000000;
 }
 
 .main__section-our-best {
-    width: var(--main-width);
     height: 495px;
     background-image: url(./img/bg/mask_group.jpg);
     background-repeat: no-repeat;
@@ -221,22 +172,14 @@ body {
     text-align: center;
     text-decoration: none;
     color: #000000;
-    
 }
 
 .main__item-name {
-    font-family: Merienda;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
     line-height: 40px;
 }
 
 .main__item-price {
-    font-family: Merienda;
-    font-style: normal;
     font-weight: bold;
-    font-size: 14px;
     line-height: 20px;
     text-align: right;
 }
@@ -249,6 +192,5 @@ body {
 }
 
 .footer {
-    width: var(--main-width);
     height: 150px;
 }
