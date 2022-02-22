@@ -1,0 +1,135 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Merienda;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+}
+b {
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Merienda; 
+  src: url(../../fonts/Merienda/Merienda-Regular.ttf); 
+  src: url(../../fonts/Merienda/Merienda-Bold.ttf); 
+}
+
+.App {
+  min-width: 740px;
+}
+
+.separator {
+  height: 38px;
+  background-image: url(../../img/logo/beans_logo_white.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+.separator--black {
+  background-image: url(../../img/logo/beans_logo_black.svg);
+}
+.separator--line {
+  background-image: url(../../img/logo/line_240.svg);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.h2 {
+  padding-top: 10px;
+  margin-bottom: 0px;
+  height: 36px;
+  text-align: center;
+  font-size: 24px;
+  color: #000000;
+}
+
+.list {
+  padding-bottom: 70px;
+}
+.list--best {
+  padding-bottom: 100px;
+}
+
+.list__row {
+  margin-top: 50px;
+  display:flex;
+  justify-content: center;
+}
+
+.item {
+  flex-basis: 220px;
+  min-width: 215px;
+  height: 260px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  margin-left: 2%;
+  margin-right: 2%;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  line-height: 30px;
+  color: #000000;
+  filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.25));
+}
+
+.item--best {
+  background: rgba(255, 255, 255, 0.65);
+  height: 240px;
+  filter: none;
+}
+
+.item__name {
+  text-align: right;
+} 
+
+.item__country {
+  text-align: right;
+}
+
+.item__price {
+  font-weight: bold;
+  text-align: right;
+}
+
+.item__image-wrapper {
+  height: 145px; 
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 10px;
+}
+
+.article {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.article__content-wrapper {
+  padding: 40px;
+  padding-right: 69px;
+  padding-left: 11px;
+  width: 472px;
+  text-align: right;
+}
+.article__content-wrapper--with-description {
+  padding-left: 0px;
+  padding-right: 29px;
+  text-align: left;
+}
+.article__content-wrapper--centre {
+  text-align: center;
+  padding-right: 120px;
+}
+
+.article__price {
+  font-size: 24px;
+}
+
+.article__image {
+  filter: drop-shadow(5px 5px 30px rgba(0, 0, 0, 0.25));
+}

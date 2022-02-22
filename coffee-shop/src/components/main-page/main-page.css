@@ -1,0 +1,29 @@
+
+.main__section-about-us {
+    padding-top: 70px;
+    height: 590px;
+    background: #FFFFFF;
+    text-align: center;
+}
+  
+.main__text-wrapper {
+    display:flex;
+    justify-content: center;
+}
+  
+.main__text {
+    margin-top: 25px;
+    width: 589px;
+    height: 223px;
+    line-height: 20px;
+    text-align: center;
+    color: #000000;
+}
+  
+.main__section-our-best {
+    padding-top: 70px;
+    background-image: url(../../img/bg/main-page-mask-group.jpg);
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-size: cover;
+}

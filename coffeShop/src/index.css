@@ -320,11 +320,11 @@ body {
     line-height: 17px;
 }
 
-.search-panel__filter-item--right {
+.search-panel__filter-item:last-child {
     border-radius: 0px 4px 4px 0px;
 }
 
-.search-panel__filter-item--left {
+.search-panel__filter-item:first-child {
     border-radius: 4px 0px 0px 4px;
 }
 
