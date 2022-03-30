@@ -1,6 +1,6 @@
 import './nav-bar.css';
 
-function NavBar(prop) {
+const NavBar = (prop) => {
     
 const navBarClass = "nav-bar" + (prop.isHeader ? "" : " nav-bar--in-footer");
 const linkWrapperClass = "nav-bar__link-wrapper" + (prop.isHeader ? " nav-bar__link-wrapper--with-white-logo" : " nav-bar__link-wrapper--with-black-logo");

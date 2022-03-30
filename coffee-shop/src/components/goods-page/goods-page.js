@@ -3,7 +3,7 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 
 
-function GoodsPage() {
+const GoodsPage = () => {
     return (
         <>
             <Header page="coffee-page" namePage="Our Coffee"/>

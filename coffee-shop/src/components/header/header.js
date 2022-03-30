@@ -2,7 +2,7 @@ import './header.css';
 import NavBar from '../nav-bar/nav-bar';
 
 
-function Header(prop) {
+const Header = (prop) => {
     switch (prop.page) {
         case "main-page":
             return (

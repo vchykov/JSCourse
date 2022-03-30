@@ -1,9 +1,10 @@
 import './main-page.css';
 import Header from '../header/header';
 import Footer from '../footer/footer';
+import List from '../list/list';
 
 
-function MainPage() {
+const MainPage = (props) => {
     return (
         <>
             <Header page="main-page" namePage="Everything You Love About Coffee"/>
@@ -31,40 +32,7 @@ function MainPage() {
                     <section class="main__section-our-best">
 
                         <h2 class="h2">Our best</h2>
-                        <div class="list list--best">
-                            <div class="list__row">
-                                <a href="/item" class="item item--best">
-                                    <div class="item__image-wrapper">
-                                        <img class="item__image" 
-                                            src="./img/best_items/Solimo Coffee Beans 2 kg.png" 
-                                            alt="Solimo Coffee Beans 2 kg"
-                                        />
-                                    </div>
-                                    <div class="item__name">Solimo Coffee Beans 2 kg</div>
-                                    <div class="item__price">10.73$</div>
-                                </a>
-                                <a href="/item" class="item item--best">
-                                    <div class="item__image-wrapper">
-                                        <img class="item__image" 
-                                            src="./img/best_items/Presto Coffee Beans 1 kg.png" 
-                                            alt="Presto Coffee Beans 1 kg"
-                                        />
-                                    </div>
-                                    <div class="item__name">Presto Coffee Beans 1 kg</div>
-                                    <div class="item__price">15.99$</div>
-                                </a>
-                                <a href="/item" class="item item--best">
-                                    <div class="item__image-wrapper">
-                                        <img class="item__image" 
-                                            src="./img/best_items/AROMISTICO Coffee 1 kg.png" 
-                                            alt="AROMISTICO Coffee 1 kg"
-                                            />
-                                    </div>
-                                    <div class="item__name">AROMISTICO Coffee 1 kg</div>
-                                    <div class="item__price">6.99$</div>
-                                </a>
-                            </div>
-                        </div>
+                        <List data={props.data} isBest={true}/>
 
                     </section>
                 </main>

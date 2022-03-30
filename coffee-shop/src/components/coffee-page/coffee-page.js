@@ -1,9 +1,9 @@
 import './coffee-page.css';
 import Header from '../header/header';
 import Footer from '../footer/footer';
+import List from '../list/list';
 
-
-function CoffeePage() {
+const CoffeePage = (props) => {
     return (
         <>
             <Header page="coffee-page" namePage="Our Coffee"/>
@@ -38,78 +38,7 @@ function CoffeePage() {
                     </div>
                 </div>
             </div>
-            <section class="list">
-                <div class="list__row">
-                    <a href="/item" class="item">
-                        <div class="item__image-wrapper">
-                            <img class="item__image" 
-                                src="./img/images/item-167x115.jpg" 
-                                alt="AROMISTICO Coffee 1 kg"
-                            />
-                        </div>
-                        <div class="item__name">AROMISTICO Coffee 1 kg</div>
-                        <div class="item__country">Brasil</div>
-                        <div class="item__price">6.99$</div>
-                    </a>
-                    <a href="/item" class="item">
-                        <div class="item__image-wrapper">
-                            <img class="item__image" 
-                                src="./img/images/item-167x115.jpg" 
-                                alt="AROMISTICO Coffee 1 kg"
-                            />
-                        </div>
-                        <div class="item__name">AROMISTICO Coffee 1 kg</div>
-                        <div class="item__country">Kenya</div>
-                        <div class="item__price">6.99$</div>
-                    </a>
-                    <a href="/item" class="item">
-                        <div class="item__image-wrapper">
-                            <img class="item__image" 
-                                src="./img/images/item-167x115.jpg" 
-                                alt="AROMISTICO Coffee 1 kg"
-                            />
-                        </div>
-                        <div class="item__name">AROMISTICO Coffee 1 kg</div>
-                        <div class="item__country">Columbia</div>
-                        <div class="item__price">6.99$</div>
-                    </a>
-                </div>
-                <div class="list__row">
-                    <a href="/item" class="item">
-                        <div class="item__image-wrapper">
-                            <img class="item__image" 
-                                src="./img/images/item-167x115.jpg" 
-                                alt="AROMISTICO Coffee 1 kg"
-                            />
-                        </div>
-                        <div class="item__name">AROMISTICO Coffee 1 kg</div>
-                        <div class="item__country">Brasil</div>
-                        <div class="item__price">6.99$</div>
-                    </a>
-                    <a href="/item" class="item">
-                        <div class="item__image-wrapper">
-                            <img class="item__image" 
-                                src="./img/images/item-167x115.jpg" 
-                                alt="AROMISTICO Coffee 1 kg"
-                            />
-                        </div>
-                        <div class="item__name">AROMISTICO Coffee 1 kg</div>
-                        <div class="item__country">Brasil</div>
-                        <div class="item__price">6.99$</div>
-                    </a>
-                    <a href="/item" class="item">
-                        <div class="item__image-wrapper">
-                            <img class="item__image" 
-                                src="./img/images/item-167x115.jpg" 
-                                alt="AROMISTICO Coffee 1 kg"
-                            />
-                        </div>
-                        <div class="item__name">AROMISTICO Coffee 1 kg</div>
-                        <div class="item__country">Brasil</div>
-                        <div class="item__price">6.99$</div>
-                    </a>
-                </div>
-            </section>
+            <List data={props.data}/>
             <Footer/>
         </>
     )
